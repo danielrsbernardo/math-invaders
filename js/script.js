@@ -20,6 +20,12 @@ const velocity = {
 
 const player = new Player(position, velocity);
 
+let enemies = [];
+setInterval(() => {
+  enemies.push(new Enemy(canvasWidth, canvasHeight));
+  console.log(enemies);
+}, 3000);
+
 const keys = {
   left: {
     pressed: false,
@@ -44,6 +50,14 @@ const loop = () => {
   }
 
   update();
+  enemies.forEach((enemy) => {
+    enemy.update(context);
+    if (enemy.position.y >= canvas.height) {
+      enemy.isActive = false;
+    }
+  });
+
+  enemies = enemies.filter((e) => e.isActive);
 };
 
 const update = () => {
