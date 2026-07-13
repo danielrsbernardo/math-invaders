@@ -23,8 +23,9 @@ const player = new Player(position, velocity);
 let enemies = [];
 setInterval(() => {
   enemies.push(new Enemy(canvasWidth, canvasHeight));
-  console.log(enemies);
-}, 3000);
+}, 5000);
+
+let projectiles = [];
 
 const keys = {
   left: {
@@ -58,6 +59,30 @@ const loop = () => {
   });
 
   enemies = enemies.filter((e) => e.isActive);
+
+  projectiles.forEach((projectile) => {
+    projectile.update(context);
+
+    if (projectile.position.y <= 0) {
+      projectile.isActive = false;
+    }
+  });
+
+  projectiles = projectiles.filter((e) => e.isActive);
+
+  projectiles.forEach((projectile) => {
+    enemies.forEach((enemy) => {
+      if (
+        projectile.position.x > enemy.position.x &&
+        projectile.position.x < enemy.position.x + enemy.width &&
+        projectile.position.y > enemy.position.y &&
+        projectile.position.y < enemy.position.y + enemy.height
+      ) {
+        enemy.isActive = false;
+        projectile.isActive = false;
+      }
+    });
+  });
 };
 
 const update = () => {
@@ -94,6 +119,14 @@ document.addEventListener("keyup", (e) => {
       keys.right.pressed = false;
 
       break;
+
+    case " ":
+      projectiles.push(
+        new Projectile({
+          x: player.position.x + player.width / 2,
+          y: player.position.y,
+        }),
+      );
 
     default:
       break;
