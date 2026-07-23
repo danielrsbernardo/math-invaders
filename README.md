@@ -12,3 +12,13 @@ Spawn automático de inimigos
 Movimento vertical dos inimigos
 Remoção automática de inimigos fora da tela
 Estrutura inicial baseada em Canvas API
+
+
+Math Invaders v0.2
+
+Implementação dos projéteis
+Disparo dos projéteis pelo jogador
+Colisão projétil x inimigo
+Colisão inimigo x player
+Reinício quando inimigo sai da tela
+Após colisões e reinício do jogo
