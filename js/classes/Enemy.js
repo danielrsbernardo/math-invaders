@@ -3,14 +3,14 @@ class Enemy {
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
 
-    this.velocity = { x: 0, y: 1 };
+    this.velocity = { x: 0, y: 3 };
     this.width = 50;
     this.height = 50;
-    this.color = "#f00";
+    this.color = "rgba(255, 0, 0, 0.55)";
     this.isActive = true;
 
     this.position = {
-      x: Math.random() * canvasWidth,
+      x: Math.random() * (canvasWidth - this.width),
       y: -this.height,
     };
   }

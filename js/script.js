@@ -39,13 +39,13 @@ const keys = {
 
 const loop = () => {
   requestAnimationFrame(loop);
-  context.fillStyle = "#000";
+  context.fillStyle = "rgba(0,0,0,0.9)";
   context.fillRect(0, 0, canvasWidth, canvasHeight);
 
   if (keys.left.pressed) {
-    player.velocity.x = -7;
+    player.velocity.x = -8;
   } else if (keys.right.pressed) {
-    player.velocity.x = 7;
+    player.velocity.x = 8;
   } else {
     player.velocity.x = 0;
   }
@@ -83,10 +83,36 @@ const loop = () => {
       }
     });
   });
+
+  enemies.forEach((enemy) => {
+    if (
+      enemy.position.x + enemy.width > player.position.x &&
+      enemy.position.x < player.position.x + player.width &&
+      enemy.position.y + enemy.height > player.position.y &&
+      enemy.position.y < player.position.y + player.height
+    ) {
+      resetGame();
+    }
+  });
+
+  enemies.forEach((enemy) => {
+    if (enemy.position.y + enemy.height > canvas.height) {
+      resetGame();
+    }
+  });
 };
 
 const update = () => {
   player.update(canvasWidth, context);
+};
+
+const resetGame = () => {
+  player.position.x = canvasWidth / 2 - 25;
+  player.position.y = canvasHeight - 50;
+  player.velocity.x = 0;
+  player.velocity.y = 0;
+  enemies = [];
+  projectiles = [];
 };
 
 loop();

@@ -3,7 +3,7 @@ class Projectile {
     this.position = position;
 
     this.radius = 10;
-    this.color = "#0f0";
+    this.color = "#ff0";
     this.velocity = 5;
     this.isActive = true;
   }

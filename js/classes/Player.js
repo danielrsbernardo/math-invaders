@@ -2,8 +2,8 @@ class Player {
   constructor(position, velocity) {
     this.position = position;
     this.velocity = velocity;
-    this.width = 150;
-    this.height = 50;
+    this.width = 80;
+    this.height = 80;
   }
 
   update(canvasWidth, context) {
